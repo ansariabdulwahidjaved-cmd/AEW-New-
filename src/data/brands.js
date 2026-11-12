@@ -16,14 +16,14 @@ export const brands=[
   {name:'PRAMA', logo: '/brands/prama_logo.png'},
   // Row 2 – placeholders. Example: {name:'Essl',logo:'/brands/essl.png'}
   {name:'Essl', logo: '/brands/essl_logo.png'},
-  {name:'BioMax'},
+  {name:'BioMax', logo: '/brands/biomax_logo.png'},
   {name:'Polycab', logo: '/brands/polycab_logo.png'},
-  {name:'Crystal'},
+  {name:'Crystal', logo: '/brands/crystal_logo.png'},
   {name:'Panasonic', logo: '/brands/panasonic_logo.png'},
-  {name:'NEC'},
+  {name:'NEC', logo: '/brands/nec_logo.png'},
   // Row 3
   {name:'Dell', logo: '/brands/dell_logo.png'},
   {name:'HP', logo: '/brands/hp_logo.png'},
   {name:'Honeywell', logo: '/brands/honeywell_logo.png'},
-  {name:'Ravel'},
+  {name:'Ravel', logo: '/brands/ravel_logo.png'},
 ]

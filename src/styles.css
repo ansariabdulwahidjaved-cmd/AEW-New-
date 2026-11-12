@@ -1183,10 +1183,10 @@ footer p {
   animation-direction: reverse
 }
 
-.mq-rows:hover .mq-track,
+/* .mq-rows:hover .mq-track,
 .mq-rows:focus-within .mq-track {
   animation-play-state: paused
-}
+} */
 
 @keyframes mqscroll {
   from {
