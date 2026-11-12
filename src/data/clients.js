@@ -7,7 +7,7 @@
 export const clients=[
   {name:'Zepto', logo:'/clients/zepto_logo.png'},                                          // placeholder – add logo:'/clients/zepto.png'
   {name:'Blinkit', logo:'/clients/blinkit_logo.png'},                                        // placeholder – add logo:'/clients/blinkit.png'
-  {name:'Air India', logo:'/clients/airindia.svg'},
+  {name:'Air India', logo:'/clients/airIndia_logo.png'},
   {name:'Zomato', logo:'/clients/zomato.svg'},
   {name:'Hindustan Telecom', logo:'/clients/ht_logo.png'},                              // placeholder – add logo:'/clients/hindustan-telecom.png'
   // {name:'Ace Solutions'},                                  // placeholder – add logo:'/clients/ace-solutions.png'
