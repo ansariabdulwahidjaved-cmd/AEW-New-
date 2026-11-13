@@ -22,24 +22,114 @@ export const ProductCard=({p,onView,onEnquire})=>(<article className="card lift 
   <Img src={p.image} icon={p.icon} color={p.color} alt={p.name}/><span className="tag">{p.category}</span><h3>{p.name}</h3><p>{p.desc}</p>
   <div className="row"><Button variant="outline" onClick={()=>onView(p)}>View Details</Button><Button onClick={()=>onEnquire(p)}>Enquire Now</Button></div></article>)
 
-export function InquiryForm({services=[],product,defaultService='',onSent}){
-  const [v,setV]=useState({name:'',phone:'',email:'',service:product?'Product enquiry':defaultService,message:product?`I would like to enquire about: ${product.name}.`:''})
-  const [err,setErr]=useState({}),[sent,setSent]=useState(false)
-  useEffect(()=>{if(defaultService)setV(x=>({...x,service:defaultService}))},[defaultService])
-  const set=k=>e=>setV({...v,[k]:e.target.value})
-  const submit=e=>{e.preventDefault();const x={}
-    if(v.name.trim().length<2)x.name='Please enter your full name.'
-    if(!/^[+\d\s()-]{7,16}$/.test(v.phone.trim()))x.phone='Enter a valid phone number.'
-    if(!/^\S+@\S+\.\S+$/.test(v.email.trim()))x.email='Enter a valid email address.'
-    if(!v.service)x.service='Please choose a service.'
-    if(v.message.trim().length<10)x.message='Message should be at least 10 characters.'
-    setErr(x);if(Object.keys(x).length)return
-    // TODO: connect to your backend / email service here (e.g. fetch('/api/inquiry',{method:'POST',body:JSON.stringify(v)}))
-    console.log('Inquiry',v);setSent(true);onSent&&onSent(v)}
-  if(sent)return <div className="ok" role="status"><I.CheckCircle2/> Thank you, {v.name.split(' ')[0]}. Your inquiry has been submitted.</div>
-  const F=({k,label,type='text',children})=>(<label>{label}{children||<input type={type} value={v[k]} onChange={set(k)} aria-invalid={!!err[k]}/>}{err[k]&&<em role="alert">{err[k]}</em>}</label>)
-  return <form onSubmit={submit} noValidate className="form">
-    <F k="name" label="Full Name"/><F k="phone" label="Phone Number" type="tel"/><F k="email" label="Email Address" type="email"/>
-    <F k="service" label="Service Interested In"><select value={v.service} onChange={set('service')}><option value="">Select a service…</option>{services.map(s=><option key={s}>{s}</option>)}</select></F>
-    <F k="message" label="Message"><textarea rows="4" value={v.message} onChange={set('message')}/></F>
-    <Button type="submit"><I.Send size={16}/> Submit Inquiry</Button></form>}
+export function InquiryForm({ services = [], product, defaultService = '', onSent }) {
+  const [v, setV] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    service: product ? 'Product enquiry' : defaultService,
+    message: product
+      ? `I would like to enquire about: ${product.name}.`
+      : ''
+  });
+
+  const [err, setErr] = useState({});
+  const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    if (defaultService) {
+      setV(x => ({ ...x, service: defaultService }));
+    }
+  }, [defaultService]);
+
+  const set = k => e => {
+    setV(prev => ({ ...prev, [k]: e.target.value }));
+  };
+
+  const submit = e => {
+    e.preventDefault();
+
+    const x = {};
+
+    // Mandatory Name field
+    if (v.name.trim().length < 2) {
+      x.name = 'Please enter your full name.';
+    }
+
+    // Mandatory Phone Number field
+    if (!/^[+\d\s()-]{7,16}$/.test(v.phone.trim())) {
+      x.phone = 'Enter a valid phone number.';
+    }
+
+    // Email is optional, but validate it if provided
+    if (v.email.trim() && !/^\S+@\S+\.\S+$/.test(v.email.trim())) {
+      x.email = 'Enter a valid email address.';
+    }
+
+    // Service and Message are optional
+
+    setErr(x);
+
+    if (Object.keys(x).length) return;
+
+    // TODO: Connect to your backend / Cloudflare D1 API
+    console.log('Inquiry', v);
+
+    setSent(true);
+    onSent && onSent(v);
+  };
+
+  if (sent) {
+    return (
+      <div className="ok" role="status">
+        <I.CheckCircle2 />
+        Thank you, {v.name.split(' ')[0]}. Your inquiry has been submitted.
+      </div>
+    );
+  }
+
+  const F = ({ k, label, type = 'text', children }) => (
+    <label>
+      {label}
+      {children || (
+        <input
+          type={type}
+          value={v[k]}
+          onChange={set(k)}
+          aria-invalid={!!err[k]}
+          required={k === 'name' || k === 'phone'}
+        />
+      )}
+      {err[k] && <em role="alert">{err[k]}</em>}
+    </label>
+  );
+
+  return (
+    <form onSubmit={submit} noValidate className="form">
+      <F k="name" label="Full Name *" />
+      <F k="phone" label="Phone Number *" type="tel" />
+      <F k="email" label="Email Address" type="email" />
+
+      <F k="service" label="Service Interested In">
+        <select value={v.service} onChange={set('service')}>
+          <option value="">Select a service…</option>
+          {services.map(s => (
+            <option key={s}>{s}</option>
+          ))}
+        </select>
+      </F>
+
+      <F k="message" label="Message">
+        <textarea
+          rows="4"
+          value={v.message}
+          onChange={set('message')}
+        />
+      </F>
+
+      <Button type="submit">
+        <I.Send size={16} /> Submit Inquiry
+      </Button>
+    </form>
+  );
+}

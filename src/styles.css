@@ -1338,3 +1338,66 @@ footer p {
 @media(prefers-reduced-motion:reduce) {
   .clients-track { scroll-behavior: auto }
 }
+
+
+/* ===== Customer Reviews (Home) ===== */
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0
+}
+
+.review .stars {
+  display: flex;
+  gap: 3px
+}
+
+.review .stars .on {
+  color: var(--orange);
+  fill: var(--orange)
+}
+
+.review .stars .off {
+  color: var(--line);
+  fill: var(--line)
+}
+
+.review blockquote {
+  margin: 0;
+  color: var(--muted);
+  font-style: italic;
+  flex: 1
+}
+
+.review figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line)
+}
+
+.review figcaption strong,
+.review figcaption small {
+  display: block;
+  line-height: 1.35
+}
+
+.review figcaption small {
+  color: var(--muted);
+  font-size: .82rem
+}
+
+.review .avatar {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--c);
+  color: #fff;
+  font-weight: 600;
+  font-size: .9rem
+}
