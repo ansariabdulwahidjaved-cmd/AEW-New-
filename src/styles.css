@@ -1234,7 +1234,7 @@ footer p {
   list-style: none;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: none;
   scrollbar-width: none;
   outline-offset: 4px
 }
